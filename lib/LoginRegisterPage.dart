@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'Authentication.dart';
 
 class LoginRegisterPage extends StatefulWidget {
+
+  LoginRegisterPage({
+    this.auth,
+    this.onSignedIn
+  });
+
+  final AuthImplementation auth;
+  final VoidCallback onSignedIn;
+
   State<StatefulWidget> createState() {
     return _LoginRegisterState();
   }
@@ -19,6 +29,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
   String _password = '';
 
   // methods
+  // 验证表单后保存
   bool validateAndSave() {
     final form = formKey.currentState;
     if(form.validate()) {
@@ -26,6 +37,25 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
       return true;
     } else {
       return false;
+    }
+  }
+
+  // 验证通过后提交
+  void validateAndSubmit() async {
+    if(validateAndSave()) {
+      try {
+        if(_formType == FormType.login) {
+          String userId = await widget.auth.signIn(_email, _password);
+          print('login userId = ' + userId);
+        } else {
+          String userId = await widget.auth.signUp(_email, _password);
+          print('Register userId = ' + userId);
+        }
+
+        widget.onSignedIn();
+      } catch(e) {
+        print('Error = ' + e.toString());
+      }
     }
   }
 
@@ -115,7 +145,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
           child: Text('登录', style: TextStyle(fontSize: 20.0)),
           textColor: Colors.white,
           color: Colors.pink,
-          onPressed: validateAndSave,
+          onPressed: validateAndSubmit,
         ),
         FlatButton(
           child: Text('还没有账户，去注册', style: TextStyle(fontSize: 14.0)),
@@ -129,7 +159,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
           child: Text('注册', style: TextStyle(fontSize: 20.0)),
           textColor: Colors.white,
           color: Colors.pink,
-          onPressed: validateAndSave,
+          onPressed: validateAndSubmit,
         ),
         FlatButton(
           child: Text('已有账户，去登录', style: TextStyle(fontSize: 14.0)),

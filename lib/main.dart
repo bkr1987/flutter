@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'LoginRegisterPage.dart';
-import 'HomePage.dart';
+// import 'HomePage.dart';
+import 'Mapping.dart';
+import 'Authentication.dart';
 
 void main() => runApp(BlogApp());
 
@@ -22,7 +24,8 @@ class BlogApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.pink
       ),
-      home: HomePage(),
+      // HomePage()
+      home: MappingPage(auth: Auth(),),
     );
   }
 }
