@@ -48,7 +48,8 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Blog App'), centerTitle: true
+        title: Text('Flutter Blog App'),
+        centerTitle: true
       ),
       body: Container(
         margin: EdgeInsets.all(15.0),

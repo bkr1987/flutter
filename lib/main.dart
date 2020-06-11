@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'LoginRegisterPage.dart';
+// import 'LoginRegisterPage.dart';
+import 'HomePage.dart';
 
 void main() => runApp(BlogApp());
 
@@ -21,7 +22,7 @@ class BlogApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.pink
       ),
-      home: LoginRegisterPage(),
+      home: HomePage(),
     );
   }
 }
